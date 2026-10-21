@@ -1,0 +1,19 @@
+{
+  "name": "KLOZIO",
+  "short_name": "KLOZIO",
+  "description": "Jeu mobile de simulation de vente B2B",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF1E1",
+  "theme_color": "#FFF1E1",
+  "categories": ["education", "games", "business"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "public/brand/klozio_icone_bleu.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,308 @@
+/* KLOZIO — mise en page mobile d'abord (360×800), colonne ≤ 460 px. Couleurs : variables injectées depuis tokens.js.
+   M8 v2 — typo : Outfit 800 (titres, scores, boutons), Inter 400/500 (corps), IBM Plex Mono 500 (chiffres, codes). */
+:root{
+  --display:"Outfit",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --tap:48px; --gap:10px;
+  --reveal-ms:160ms; --stagger-ms:60ms; --gauge-ms:600ms; --stamp-ms:500ms;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{margin:0;min-height:100%;overflow-x:hidden;overflow-x:clip} /* clip : pas de conteneur de défilement, le bandeau sticky reste actif */
+body{background:var(--bg);color:var(--fg);font:400 16px/1.45 var(--body);
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px));
+  -webkit-tap-highlight-color:transparent}
+.app{max-width:460px;margin:0 auto;padding-block:16px 32px;display:flex;flex-direction:column;gap:16px;min-height:100dvh}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.01em;margin:0;text-wrap:balance;line-height:1.15}
+b,strong{font-weight:500}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-appearance:none;appearance:none}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+/* Texte réservé aux lecteurs d'écran (annonces) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+[tabindex="-1"]:focus{outline:none}
+.eyebrow{font:500 12px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+/* Bandeau BROUILLON : collé en haut de l'écran à toutes les étapes, même après défilement */
+/* Brouillon : bandeau + barre du haut collés ensemble ; la barre est sous le bandeau, jamais recouverte */
+.gamehead{position:sticky;top:0;z-index:5;display:flex;flex-direction:column;gap:10px;background:var(--bg);
+  padding:env(safe-area-inset-top,0px) 0 10px;margin-top:calc(-1 * env(safe-area-inset-top,0px));box-shadow:0 8px 8px -8px color-mix(in srgb,var(--fg) 25%,transparent)}
+.banner{background:var(--accent);color:var(--accent-ink);font:500 13px/1.2 var(--body);letter-spacing:.08em;padding:8px 12px;border-radius:8px;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+
+/* Boutons : ≥ 48 px de haut (A3) */
+.cta{min-height:var(--cta);background:var(--accent);color:var(--accent-ink);border:0;border-radius:14px;padding:14px 16px;font:800 17px/1.2 var(--display);letter-spacing:-.01em;width:100%}
+.ghost{min-height:var(--tap);background:none;border:1.5px solid var(--accent);border-radius:12px;padding:12px 16px;font:500 15px/1.2 var(--body);color:var(--accent)}
+.ghost.danger{background:var(--bad);border-color:var(--bad);color:var(--fg)} /* effacer la sauvegarde : aplat corail, texte chocolat */
+.ghost[aria-pressed="true"]{border-color:var(--accent);border-width:2.5px;color:var(--accent)}
+.link{min-height:var(--tap);background:none;border:0;color:var(--muted);font-size:15px;text-decoration:underline;text-underline-offset:3px;padding:0 8px}
+.row{display:flex;gap:var(--gap)}
+.row>*{flex:1}
+.stack{display:flex;flex-direction:column;gap:var(--gap)}
+.deal-cards{display:contents} /* M9 : cartes du CA et du deal du jour, remplies quand l'index des deals arrive */
+
+/* Accueil */
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wordmark{margin:0;line-height:0}
+.wordmark img{display:block;width:56%;height:auto}
+.brand-actions{display:flex;gap:8px;align-items:center}
+.ghost.icon{min-width:var(--tap);padding:10px;display:grid;place-items:center}
+.ghost.icon[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+.brand .ed{font:800 16px/1.2 var(--display);letter-spacing:-.01em;color:var(--sig);display:block}
+.brand .role{font-size:13px;color:var(--muted)}
+.board{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:center}
+.board h2{font-size:19px;margin-bottom:4px}
+.board p{font-size:14px;color:var(--muted)}
+.board .count{font:500 14px/1.4 var(--mono);color:var(--fg);margin-top:8px}
+.board .complete{color:var(--accent);font-weight:500}
+.wp{grid-column:1/-1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:14px}
+.wp li{display:flex;align-items:center;gap:8px}
+.wp li span:first-of-type{flex:1;min-width:0}
+.wp li i{flex:none;width:12px;height:12px;border-radius:50%;border:2px solid}
+.wp li .mono{font-size:13px;color:var(--muted)}
+.wp li.done .mono{color:var(--fg)}
+.revenue{display:flex;flex-direction:column;gap:6px}
+.revenue b{font:500 26px/1.1 var(--mono)}
+.revenue p{font-size:15px}
+.revenue .meter{margin-block:4px 2px}
+.deals{display:flex;flex-direction:column;gap:var(--gap)}
+.deal-card{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;text-align:left;width:100%;min-height:var(--tap);
+  background:var(--surface);border:1.5px solid var(--line-strong);border-radius:12px;padding:14px 16px;color:var(--fg)}
+.deal-card:hover{border-color:var(--accent)}
+.deal-card .main,.deal-card .side{display:flex;flex-direction:column;gap:4px}
+.deal-card .main{min-width:0}
+.deal-card .side{align-items:flex-end;flex:none}
+.deal-card h3{font-size:18px}
+.deal-card .who{color:var(--muted);font-size:14px}
+.deal-card .val{font:500 15px/1.4 var(--mono)}
+.deal-card .st{font-size:13px;font-weight:500;color:var(--muted);display:flex;gap:6px;align-items:center}
+.deal-card .draft{font:500 12px/1 var(--body);letter-spacing:.1em;color:var(--accent)}
+.empty{text-align:center;display:flex;flex-direction:column;gap:6px;padding:24px 16px}
+
+/* Partie */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topbar .ghost{flex:none;padding:10px 14px;font-size:14px}
+.topbar .meta{text-align:right;min-width:0}
+.topbar .meta b{display:block;font:800 15px/1.25 var(--display);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .meta span{font:500 13px/1.3 var(--mono);color:var(--muted)}
+.topbar .meta span.plain{font:14px/1.3 var(--body)}
+.topbar .meta span.lived{display:block;font:italic 13px/1.3 var(--body)}
+.lesson{display:flex;flex-direction:column;align-items:center;margin-top:8px}
+.lesson .lesson-msg:empty{display:none}
+/* Partie : roue du deal (géométrie du O du logo) à côté de la jauge */
+.dealbar{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center}
+.track{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+/* A12 : pastilles d'étape, trois états distinguables sans la couleur */
+.seg{height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;gap:3px;font:500 13px/1 var(--mono)}
+.seg.next{color:var(--muted);background:transparent;border:1.5px dashed var(--muted)}
+.seg.now{color:var(--fg);background:var(--surface);border:2.5px solid var(--fg)}
+.seg.done{color:var(--skill-ink);border:1.5px solid transparent}
+.gauge{display:flex;flex-direction:column;gap:6px}
+.gauge-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted)}
+.gauge-row b{font:500 15px/1 var(--mono);color:var(--fg)}
+.gauge-row .delta{font:500 13px/1 var(--mono);margin-left:6px}
+/* A11 : marqueur plein, plus haut et plus contrasté que les seuils ; seuils en traits fins libellés */
+.bar{height:12px;border-radius:99px;background:linear-gradient(90deg,var(--cold),var(--hot));box-shadow:0 0 0 1.5px var(--line-strong);position:relative;margin-block:10px 2px}
+.bar i{position:absolute;top:-10px;width:12px;height:32px;border-radius:6px;background:var(--fg);border:2.5px solid var(--bg);transform:translateX(-6px);z-index:1;
+  box-shadow:0 1px 3px color-mix(in srgb,var(--fg) 35%,transparent);transition:left var(--gauge-ms) cubic-bezier(.3,.8,.3,1)}
+.bar .tick{position:absolute;top:-4px;height:20px;width:2px;background:var(--fg);transform:translateX(-1px);box-shadow:0 0 0 1.5px var(--bg)}
+.gauge-scale{position:relative;display:flex;justify-content:space-between;font-size:12px;line-height:1.3;color:var(--muted);height:16px}
+.gauge-scale .th{position:absolute;top:0;transform:translateX(-50%);color:var(--fg);font-weight:500}
+.scene{display:flex;flex-direction:column;gap:10px}
+.scene .stage{display:flex;align-items:center;gap:6px;font:500 12px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.scene .ctx{font-size:17px;line-height:1.45}
+.scene .ask{font:500 17px/1.45 var(--body)}
+.opts{display:flex;flex-direction:column;gap:var(--gap)}
+/* A13 : avant le choix, une option a l'air active : même fond que les cartes de scène, bordure contrastée
+   (≥ 4,5:1), texte en couleur pleine, numéro sur pastille laiton, état au toucher */
+.opt{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:start;text-align:left;width:100%;min-height:var(--tap);
+  background:var(--surface-2);color:var(--fg);border:2px solid var(--line-strong);border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.45;
+  box-shadow:0 1px 2px color-mix(in srgb,var(--fg) 8%,transparent);transition:transform .08s,border-color .08s,background-color .08s}
+.opt .num{grid-row:1;width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);background:var(--accent);display:grid;place-items:center;font:500 13px/1 var(--mono);color:var(--accent-ink)}
+.opt .txt{color:var(--fg);font-weight:500}
+.opt:not(:disabled):active{transform:scale(.985);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.opt .txt{grid-column:2}
+.opt:not(:disabled):hover{border-color:var(--fg)}
+.opt:disabled{cursor:default}
+.opt .grade,.opt .fb{grid-column:2;display:none}
+.opt .grade{align-items:center;gap:6px;font:500 13px/1.2 var(--body);letter-spacing:.04em;text-transform:uppercase}
+.opt .fb{font-size:16px;line-height:1.45;color:var(--muted)}
+.revealed .opt .grade{display:flex;justify-self:start}
+.revealed .opt .fb{display:block}
+.revealed .opt{background:var(--surface);animation:reveal var(--reveal-ms) ease-out both;animation-delay:calc(var(--i) * var(--stagger-ms))}
+@keyframes reveal{from{opacity:.25;transform:translateY(4px)}}
+.opt.picked{border-width:3px}
+.opt.picked.g3{border-color:var(--good)} .opt.picked.g1{border-color:var(--mid)} .opt.picked.g0{border-color:var(--bad)}
+.opt.picked .num{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.revealed .opt:not(.picked) .num{background:none;color:var(--fg);border-color:var(--line-strong)}
+.keyhint{font-size:13px;color:var(--muted);text-align:center;display:none}
+@media (hover:hover) and (pointer:fine){.keyhint{display:block}}
+
+/* Débrief */
+.verdict{text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center;padding-block:12px 4px}
+.stamp{font:800 36px/1 var(--display);letter-spacing:.06em;padding:10px 18px;border:4px solid var(--fg);border-radius:8px;transform:rotate(-4deg);
+  animation:stamp var(--stamp-ms) cubic-bezier(.2,1.4,.4,1) both}
+@keyframes stamp{from{transform:rotate(-4deg) scale(1.8);opacity:0}}
+.verdict .ca{font:500 20px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.costliest{display:flex;flex-direction:column;gap:4px}
+.costliest .cost-step{font:800 16px/1.3 var(--display);letter-spacing:-.01em}
+.scene .value-tag{margin-left:auto;font:500 12px/1 var(--body);letter-spacing:.06em;color:var(--fg);border:1.5px solid currentColor;border-radius:99px;padding:4px 8px}
+.opt .grade .cost{margin-left:auto;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;color:inherit}
+.verdict .temp{font-size:14px;color:var(--muted)}
+.mgr{display:flex;flex-direction:column;gap:4px}
+.mgr q{font-style:italic;font-size:16px}
+.mgr q::before{content:"« "} .mgr q::after{content:"\00a0»"} /* espace insécable : jamais de » seul en début de ligne */
+.steps{display:flex;flex-direction:column;gap:8px}
+.step-row{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;font-size:15px}
+.step-row .ab{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;font:500 12px/1 var(--mono);color:var(--skill-ink)}
+.step-row .g{display:flex;align-items:center;gap:6px;font-weight:500;font-size:14px}
+.won{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center}
+.won p{font-size:15px;margin:0}
+.won .stack{gap:6px}
+.won .rec{color:var(--accent);font-weight:500}
+/* M8 v2 : une part de roue qui se remplit apparaît depuis le centre du cercle, comme au logo */
+.wheel .part-in{transform-box:view-box;transform-origin:60px 60px;animation:part-in var(--part-ms,140ms) ease-out both}
+@keyframes part-in{from{opacity:0;transform:scale(.6)}}
+
+/* Options */
+.opt-group{display:flex;flex-direction:column;gap:8px}
+.opt-group h2{font-size:17px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:var(--tap);width:100%;text-align:left;
+  background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--fg)}
+.switch .knob{flex:none;width:44px;height:26px;border-radius:99px;background:var(--line);position:relative}
+.switch .knob::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--surface);transition:left .15s}
+.switch[aria-checked="true"] .knob{background:var(--accent)}
+.switch[aria-checked="true"] .knob::after{left:21px}
+.switch small{display:block;color:var(--muted);font-size:13px}
+.confirm{display:flex;flex-direction:column;gap:var(--gap)}
+.footer{font-size:13px;color:var(--muted);text-align:center;margin-top:auto}
+
+/* Effets réduits : option du jeu ou réglage du système */
+.reduced *,.reduced *::before,.reduced *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.page-title{font-size:24px}
+
+/* Événement de deal */
+.event{display:flex;flex-direction:column;gap:6px;border-left:4px solid var(--bad)}
+.event p{font-size:16px;line-height:1.45}
+.event .event-temp{font:500 14px/1.2 var(--mono);color:var(--fg)}
+
+/* Accueil : navigation */
+.ghost.wide{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left}
+.cta:disabled{opacity:1;background:var(--line);color:var(--muted);cursor:default}
+.small{font-size:13px}
+
+/* Campagne */
+.group{display:flex;flex-direction:column;gap:var(--gap);padding-top:8px}
+.group-head{display:flex;align-items:center;gap:14px}
+.group-head h2{font-size:20px}
+.group-head .illus{flex:none;width:96px;height:auto}
+.deal-card:disabled{cursor:default;background:transparent;border-style:dashed}
+
+/* Profil */
+.mastery{display:flex;flex-direction:column;gap:10px}
+.mastery-row{display:grid;grid-template-columns:104px 1fr 76px;gap:10px;align-items:center;font-size:15px}
+.mastery-row .mono{text-align:right;font-size:13px}
+.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:99px}
+.history{display:flex;flex-direction:column;gap:8px}
+.history-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;font-size:14px}
+.history-row .pips{display:flex;gap:2px}
+.history-row .st{font-weight:500;font-size:13px}
+
+/* Introduction */
+.intro-top{display:flex;justify-content:space-between;align-items:center}
+.intro{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;padding-block:24px 8px}
+.intro h1{font-size:28px}
+.intro p{font-size:17px;line-height:1.5;max-width:34ch}
+.intro .intro-voice{font-size:15px;color:var(--muted);margin-top:-6px}
+.intro-art{min-height:150px;display:grid;place-items:center}
+.intro-grades{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;align-items:flex-start;font:500 18px/1.2 var(--body);text-align:left}
+.intro-grades li{display:flex;align-items:center;gap:10px}
+.intro-amount{font:500 24px/1.3 var(--mono);border:2px solid var(--line-strong);border-radius:12px;padding:18px 20px}
+.intro-dots{display:flex;justify-content:center;gap:8px}
+.intro-dots i{width:10px;height:10px;border-radius:50%;border:2px solid var(--muted)}
+.intro-dots i.on{background:var(--accent);border-color:var(--accent)}
+
+/* Deal du jour */
+.daily{display:flex;flex-direction:column;gap:6px;border-top:4px solid var(--accent)}
+.daily h2{font-size:20px}
+.daily .cta,.daily .ghost{margin-top:6px}
+.daily-result{font:500 15px/1.3 var(--mono);align-self:flex-start}
+.mode-tag{font:500 13px/1.3 var(--body);color:var(--accent);margin:0}
+.mode-tag span{color:var(--muted);font-weight:400}
+
+/* Entraînement */
+.skill span:first-child{display:flex;align-items:center;gap:8px}
+.drill-sum{display:flex;flex-direction:column;gap:6px}
+.drill-sum h2{font-size:22px}
+.drill-row{grid-template-columns:1fr auto}
+
+/* Duel */
+.duel{display:flex;flex-direction:column;gap:var(--gap)}
+.code-input{min-height:var(--tap);font:500 20px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:center;
+  background:var(--surface);color:var(--fg);border:2px solid var(--line-strong);border-radius:12px;padding:10px 12px;width:100%}
+.code-input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.duel-msg{min-height:1.4em;font-size:15px}
+.duel-msg.bad{color:var(--fg);font-weight:500}
+.challenge{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.challenge .code{font:500 28px/1.2 var(--mono);letter-spacing:.06em;text-align:center;color:var(--fg);user-select:all}
+.duel-result{display:flex;flex-direction:column;gap:10px}
+.duel-verdict{font:800 18px/1.3 var(--display);letter-spacing:-.01em}
+.duel-grid{display:grid;grid-template-columns:30px 1fr 1fr;gap:8px 10px;align-items:center;font-size:14px}
+.duel-grid .ab{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;font:500 12px/1 var(--mono);color:var(--skill-ink)}
+.duel-grid .g{display:flex;align-items:center;gap:6px;font-weight:500;justify-self:start}
+.duel-grid b.mono{font-size:13px}
+
+/* Accueil : éditions à venir (verrouillées, sans contenu) */
+.editions{display:flex;flex-direction:column;gap:8px}
+.editions ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.edition-soon{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px dashed var(--line);border-radius:12px;color:var(--muted);font-size:15px}
+.edition-soon span:first-of-type{flex:1;color:var(--fg)}
+.edition-soon .soon{font:500 13px/1 var(--mono)}
+.edition-switch{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px}
+.edition-switch .soon{font:500 13px/1 var(--mono);color:var(--muted)}
+
+/* Notes et verdicts en aplat (M8 v2) : senior = bleu, texte crème ; passe = miel, texte chocolat ; faute = corail,
+   texte chocolat. Le picto de la note (A9) prend la couleur du texte. */
+.opt .grade,.step-row .g,.duel-grid .g,.intro-grades li,.deal-card .st.signed,.deal-card .st.delayed,.deal-card .st.lost,
+.history-row .st,.daily-result{padding:4px 9px;border-radius:99px}
+.opt.g3 .grade,.step-row .g.g3,.duel-grid .g3,.intro-grades .g3,.deal-card .st.signed,.history-row .st.signed,.daily-result.signed,.stamp.signed{background:var(--good);color:var(--accent-ink)}
+.opt.g1 .grade,.step-row .g.g1,.duel-grid .g1,.intro-grades .g1,.deal-card .st.delayed,.history-row .st.delayed,.daily-result.delayed,.stamp.delayed{background:var(--mid);color:var(--fg)}
+.opt.g0 .grade,.step-row .g.g0,.duel-grid .g0,.intro-grades .g0,.deal-card .st.lost,.history-row .st.lost,.daily-result.lost,.stamp.lost{background:var(--bad);color:var(--fg)}
+.history-row .pips .g3{color:var(--good)} .history-row .pips .g1{color:var(--mid)} .history-row .pips .g0{color:var(--bad)}
+
+/* M8 v2 — écran d'ouverture : logo du fichier de marque (72 % de l'écran), animé ; une fois par jour, passé d'un tap.
+   Effets réduits : les animations CSS sont coupées, tout s'affiche d'un coup (fondus de 200 ms en JS). */
+.splash{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  padding:24px;text-align:center;background:var(--bg);color:var(--fg);cursor:pointer}
+.splash-logo{width:72vw}
+.splash-logo svg{display:block;width:100%;height:auto;overflow:visible}
+.splash-name{font:800 54px/1 var(--display);letter-spacing:-.01em}
+.splash-by{font:500 11px/1.3 var(--mono);letter-spacing:.22em;margin-right:-.22em;color:var(--muted)}
+.splash-tag{font:500 17px/1.45 var(--body);color:var(--fg);max-width:28ch}
+.splash:not(.go) .splash-by,.splash:not(.go) .splash-tag{visibility:hidden}
+.splash{--sp-out:cubic-bezier(.22,1,.36,1);--sp-inout:cubic-bezier(.65,0,.35,1);--sp-pop:cubic-bezier(.34,1.4,.64,1)}
+.splash .sp-letter,.splash .sp-part,.splash-by,.splash-tag{will-change:opacity,transform}
+.splash:not(.go) .sp-letter,.splash:not(.go) .sp-part{opacity:0}
+.splash:not(.go) .sp-stroke{stroke-dashoffset:var(--len)}
+.splash.go .sp-letter{transform-box:fill-box;animation:sp-rise var(--splash-letters) var(--sp-out) both}
+.splash.go .sp-stroke{animation:sp-draw var(--splash-stroke) var(--sp-inout) both}
+.splash.go .sp-part{transform-box:view-box;transform-origin:60px 60px;animation:part-in var(--splash-part) var(--sp-pop) both}
+.splash.go .splash-by,.splash.go .splash-tag{animation:sp-rise var(--splash-tag) var(--sp-out) var(--splash-tag-at) both}
+.splash.still *{animation:none!important}
+.splash.still .sp-letter,.splash.still .sp-part{opacity:1}
+.splash.still .sp-stroke{stroke-dashoffset:0}
+@keyframes sp-rise{from{opacity:0;transform:translateY(6px)}}
+@keyframes sp-draw{from{stroke-dashoffset:var(--len)}}
+/* M10-A : carte « Édition complète » (campagne, accueil), toast (deal non publié) */
+.full-edition-slot{display:contents}
+.full-edition{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.full-edition h2{font-size:20px}
+.full-edition .ghost:disabled{border-color:var(--line);color:var(--muted);cursor:default}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;max-width:420px;margin:0 auto;
+  background:var(--fg);color:var(--bg);border-radius:12px;padding:12px 16px;font:500 15px/1.35 var(--body);text-align:center;
+  box-shadow:0 6px 20px rgb(59 31 20 / .2);animation:toast-in .2s ease-out}
+@keyframes toast-in{from{opacity:0;transform:translateY(8px)}}

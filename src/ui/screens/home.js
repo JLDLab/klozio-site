@@ -1,0 +1,146 @@
+// Accueil : édition en cours, roue, CA signé, accès Campagne, Profil, Options, autres éditions (actives, à venir).
+import { config } from '../../config.js';
+import { texts } from '../../content/texts.js';
+import { contactLine } from '../../content/schema.js';
+import { h, svg } from '../dom.js';
+import { wheelSvg } from '../wheel.js';
+import { lockIcon, soundIcon } from '../icons.js';
+import { applyOptions } from '../theme.js';
+import { wheelComplete, titleIndex, wheelProgress } from '../../game/progress.js';
+import { revenueCard } from '../revenue.js';
+import { dayKey, dailyPool, dailyDealId, currentStreak } from '../../game/daily.js';
+import { fullEditionCard } from './campaign.js';
+
+// Progression par part : « Négociation 2/3 ». Une part gagnée est marquée d'une coche (pas seulement la couleur).
+export function wheelList(progress) {
+  const ui = texts.ui;
+  return h('ul.wp', {}, progress.map(({ stage, hits, required, done }) => h(`li${done ? '.done' : ''}`, {
+    'aria-label': ui.wheelStageAria(stage.name, hits, required),
+  },
+  h('i', { style: { borderColor: `var(--stage-${stage.key})`, background: done ? `var(--stage-${stage.key})` : null }, 'aria-hidden': 'true' }),
+  h('span', {}, stage.name),
+  h('span.mono', {}, done ? ui.wheelDone : ui.wheelStage(hits, required)))));
+}
+
+// Carte du deal du jour : titre, état de l'essai officiel, série de jours.
+function dailyCard(ctx) {
+  const ui = texts.ui;
+  const key = dayKey();
+  const pool = dailyPool(ctx.deals, { dev: ctx.dev });
+  const id = dailyDealId(pool.deals, ctx.edition.id, key);
+  const deal = pool.deals.find((d) => d.id === id);
+  const card = h('section.card.daily', {}, h('span.eyebrow', {}, ui.dailyTitle));
+  if (!deal) {
+    card.append(h('p.muted', {}, ui.dailyEmpty));
+    return card;
+  }
+  const entry = ctx.save.daily?.[key];
+  const unit = ctx.edition.valueUnit;
+  card.append(h('h2', {}, deal.title), h('p.muted', {}, `${contactLine(deal.contact)} · ${ctx.money(deal.value)}`));
+  if (entry?.status === 'done') {
+    card.append(h(`p.daily-result.${entry.verdict}`, {}, ui.dailyResult(texts.verdicts[entry.verdict], entry.revenue, deal.value, unit)));
+  } else if (entry?.status === 'started') {
+    card.append(h('p.muted', {}, ui.dailyAbandoned));
+  }
+  card.append(h('p.mono.small', {}, ui.streak(currentStreak(ctx.save, key))));
+  if (pool.drafts) card.append(h('p.small.muted', {}, ui.dailyDrafts));
+  card.append(h(entry ? 'button.ghost' : 'button.cta', { type: 'button', onclick: () => ctx.go('game', { id: deal.id, daily: key }) },
+    entry ? ui.dailyReplay : ui.dailyPlay));
+  return card;
+}
+
+export function homeScreen(root, _params, ctx) {
+  const { save, dev, edition } = ctx;
+  const ui = texts.ui;
+  const parts = edition.stages.filter((s) => save.wedges[s.key]).length;
+
+  if (dev) root.append(h('div.banner', {}, ui.devBanner));
+
+  const on = Boolean(ctx.prefs.options.sound);
+  const sound = h('button.ghost.icon', {
+    type: 'button',
+    'aria-pressed': String(on),
+    'aria-label': on ? ui.soundOn : ui.soundOff,
+    title: on ? ui.soundOn : ui.soundOff,
+    onclick: () => {
+      ctx.prefs.options.sound = !ctx.prefs.options.sound;
+      ctx.persistPrefs();
+      applyOptions(ctx.prefs.options);
+      ctx.sound.play('click');
+      const now = ctx.prefs.options.sound;
+      sound.setAttribute('aria-pressed', String(now));
+      sound.setAttribute('aria-label', now ? ui.soundOn : ui.soundOff);
+      sound.title = now ? ui.soundOn : ui.soundOff;
+      sound.replaceChildren(svg(soundIcon(now, 20)));
+    },
+  }, svg(soundIcon(on, 20)));
+  // M8 v2 : le logo en haut (56 % de la largeur), puis l'édition et les actions.
+  root.append(h('h1.wordmark', {}, h('img', { src: config.brand.wordmark, alt: config.brand.name, width: 475, height: 156 })));
+  root.append(h('header.brand', {},
+    h('div', {}, h('span.ed', {}, edition.name), h('span.role', {}, edition.role)),
+    h('div.brand-actions', {}, sound, h('button.ghost', { type: 'button', onclick: () => ctx.go('options') }, ui.optionsButton))));
+
+  const progress = wheelProgress(save, edition);
+  root.append(h('section.card.board', {},
+    svg(wheelSvg(132, save.wedges, edition, { progress: Object.fromEntries(progress.map((x) => [x.stage.key, x.hits / x.required])) })),
+    h('div', {},
+      h('h2', {}, ui.wheelTitle),
+      h('p', {}, ui.wheelHint(config.wheel.requiredHits)),
+      h('p.count', {}, ui.wheelCount(parts, edition.stages.length)),
+      wheelComplete(save, edition) ? h('p.complete', {}, edition.completeTitle) : null),
+    wheelList(progress)));
+
+  // M9 : les cartes qui lisent les deals (CA, deal du jour) attendent leur index, chargé après ce premier affichage ;
+  // à sa place, une carte d'attente de même gabarit.
+  const pending = h('div.deal-cards', {},
+    h('section.card.revenue.pending', { 'aria-busy': 'true' }, h('span.eyebrow', {}, ui.revenueLabel), h('p.muted', {}, ui.dealsLoading)),
+    h('section.card.daily.pending', { 'aria-busy': 'true' }, h('span.eyebrow', {}, ui.dailyTitle), h('p.muted', {}, ui.dealsLoading)));
+  root.append(pending);
+
+  const campaign = h('button.cta', { type: 'button', onclick: () => ctx.go('campaign') }, ui.campaignButton);
+  const training = h('button.ghost', { type: 'button', onclick: () => ctx.go('training') }, ui.trainingButton);
+  const duel = h('button.ghost', { type: 'button', onclick: () => ctx.go('duel') }, ui.duelButton);
+  root.append(h('nav.stack', {},
+    campaign,
+    training,
+    h('button.ghost.wide', { type: 'button', onclick: () => ctx.go('profile') },
+      h('span', {}, ui.profileButton), h('span.muted', {}, edition.profileTitles[titleIndex(save, edition)])),
+    duel));
+
+  // M10-A : carte « Édition complète » sous les éditions ; son total n'est connu qu'avec l'index des deals.
+  const fullEdition = h('div.full-edition-slot');
+
+  const fill = () => {
+    if (!root.contains(pending)) return; // l'accueil a déjà été quitté
+    const cards = [revenueCard(ctx)];
+    if (ctx.deals.length === 0) cards.push(h('section.card.empty', {}, h('p', {}, ui.noDeals), h('p.muted', {}, ui.noDealsHint)));
+    cards.push(dailyCard(ctx));
+    pending.replaceChildren(...cards);
+    for (const b of [campaign, training, duel]) b.disabled = ctx.deals.length === 0;
+    if (ctx.partial()) fullEdition.replaceChildren(fullEditionCard(ctx));
+    if (dev && ctx.invalid.length) root.prepend(h('div.banner', {}, ui.dealsInvalid(ctx.invalid.length)));
+  };
+  ctx.onDeals(fill, () => { if (root.contains(pending)) pending.replaceChildren(ctx.dealsFailed()); });
+
+  // Changer d'édition : chaque édition a sa sauvegarde ; l'application redémarre sur l'édition choisie.
+  const others = ctx.catalogue.filter((e) => e.status === 'active' && e.id !== edition.id);
+  const soon = ctx.catalogue.filter((e) => e.status !== 'active' && !e.hidden);
+  if (others.length || soon.length) {
+    root.append(h('section.editions', { 'aria-label': ui.otherEditions },
+      h('span.eyebrow', {}, ui.otherEditions),
+      h('ul', {},
+        others.map((e) => h('li', {}, h('button.ghost.edition-switch', {
+          type: 'button',
+          'aria-label': ui.editionSwitchAria(e.name),
+          onclick: () => {
+            ctx.prefs.edition = e.id;
+            ctx.persistPrefs();
+            location.reload();
+          },
+        }, h('span', {}, e.name), h('span.soon', {}, ui.editionPlay)))),
+        soon.map((e) => h('li.edition-soon', { 'aria-label': ui.editionAria(e.name) },
+          svg(lockIcon(16)), h('span', {}, e.name), h('span.soon', {}, ui.editionSoon))))));
+  }
+  root.append(fullEdition);
+  return {};
+}
