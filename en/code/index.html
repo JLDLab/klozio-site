@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KLOZIO · Your code</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FFF1E1">
+<link rel="icon" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="../../src/ui/fonts.css">
+<!-- Généré par scripts/code-page.js (npm run dist) depuis i18n/en.json. -->
+<style>
+:root{--bg:#FFF1E1;--surface:#FFFFFF;--line:#EBD3B8;--fg:#3B1F14;--muted:#735540;--accent:#1F4BD8;--accent-ink:#FFF1E1;
+  --display:"Outfit",ui-sans-serif,system-ui,sans-serif;--body:"Inter",ui-sans-serif,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.45 var(--body);padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+main{max-width:480px;margin:0 auto;padding:20px 0 32px;display:flex;flex-direction:column;gap:18px}
+h1{font:800 28px/1.15 var(--display);letter-spacing:-.01em;margin:0}
+p{margin:0}
+a{color:var(--fg)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top img{height:26px;width:auto;display:block}
+.nav{display:flex;align-items:center;gap:14px}
+.langs{font:500 13px/1.4 var(--mono);color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.muted{color:var(--muted)}
+.code{font:600 30px/1.2 var(--mono);letter-spacing:.06em;text-align:center;color:var(--fg);user-select:all;overflow-wrap:anywhere}
+.what{font:500 14px/1.4 var(--mono);text-align:center}
+input{min-height:52px;width:100%;font:500 20px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:center;color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px}
+.cta,.ghost{min-height:52px;display:flex;align-items:center;justify-content:center;width:100%;border-radius:12px;padding:12px 16px;font:600 16px/1.2 var(--body);text-decoration:none;cursor:pointer}
+.cta{background:var(--accent);color:var(--accent-ink);border:0}
+.ghost{background:none;border:1.5px solid var(--fg);color:var(--fg);font-weight:500}
+.bad{color:#B3261E}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><a href="../../?lang=en"><img src="../../public/brand/klozio_wordmark_chocolat_bleu.svg" alt="KLOZIO" width="130" height="26"></a><span class="nav"><a href="../../?lang=en">Back to the game</a><span class="langs"><a href="../../code/" lang="fr" hreflang="fr">FR</a> · <b lang="en">EN</b></span></span></div>
+  <h1>Your KLOZIO code</h1>
+  <section class="card" id="bought" hidden>
+    <p class="muted" id="status" role="status">Payment received. Your code is on its way…</p>
+    <div id="done" hidden>
+      <p class="code" id="code"></p>
+      <p class="what" id="what"></p>
+    </div>
+    <p id="keep" hidden><b>Your code works on 3 devices. Keep it.</b> Write it down or take a screenshot. No account, no password.</p>
+    <a class="cta" id="open" href="../../?lang=en" hidden>Open the game with this code</a>
+    <button class="ghost" type="button" id="copy" hidden>Copy the code</button>
+  </section>
+  <form class="card" id="enter" hidden>
+    <label for="input">Enter the code you received after your purchase. It opens in the game, on this device.</label>
+    <input id="input" name="code" type="text" placeholder="KLZ-XXXX-XXXX" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20" enterkeyhint="go">
+    <p class="bad" id="bad" role="alert" hidden>Unreadable code. Expected format: KLZ-XXXX-XXXX.</p>
+    <button class="cta" type="submit">Open in the game</button>
+  </form>
+  <p class="muted">A problem with your code? <a id="mail" href="mailto:jordan@jldlabs.com?subject=KLOZIO%20code">jordan@jldlabs.com</a></p>
+</main>
+<script type="module">
+const data = {"endpoint":"https://klozio-stats.jldlabs.workers.dev","param":"code","game":"../../?lang=en","names":{"ae":"AE edition","sales-vp":"VP edition","sales-sdr":"SDR edition","all":"KLOZIO Complete"},"contact":"jordan@jldlabs.com","workerMessages":false,"errors":{"network":"No connection. Try again when you are online.","unknown":"This code does not exist. Check it.","revoked":"This code is no longer active.","seats":"This code has reached its device limit.","edition":"This code does not open this edition.","device":"Enter your code on this device first.","limit":"Too many attempts. Try again in an hour.","forbidden":"Not allowed.","team":"This is not a team code.","pseudo":"Nickname: 2 to 20 letters, digits or spaces.","pending":"Payment not confirmed yet. Try again in a moment.","purchase":"Purchase not found. Email us and we will resend your code.","invalid":"Invalid request."},"server":"Server unreachable. Reload the page in a moment.","copied":"Copied"};
+const $ = (id) => document.getElementById(id);
+const play = (code) => `${data.game}${data.game.includes('?') ? '&' : '?'}${data.param}=${encodeURIComponent(code)}`;
+const session = new URLSearchParams(location.search).get('session_id');
+let saved = null;
+try { saved = JSON.parse(localStorage.getItem(data.prefsKey) || 'null')?.lang ?? null; } catch { /* sans stockage */ }
+const away = session && data.langPages?.[saved];
+if (away) location.replace(`${away}${location.search}`);
+
+function show(r) {
+  $('status').hidden = true;
+  $('done').hidden = false;
+  $('code').textContent = r.code;
+  $('what').textContent = r.kind === 'all' ? data.names.all : data.names[r.editions[0]] ?? '';
+  $('keep').hidden = false;
+  $('open').href = play(r.code);
+  $('open').hidden = false;
+  if (navigator.clipboard) {
+    $('copy').hidden = false;
+    $('copy').onclick = () => navigator.clipboard.writeText(r.code).then(() => { $('copy').textContent = data.copied; }, () => {});
+  }
+}
+
+async function fetchCode(tries = 0) {
+  let res;
+  try {
+    res = await fetch(`${data.endpoint}/stripe/code?session_id=${encodeURIComponent(session)}`);
+  } catch {
+    res = null;
+  }
+  const body = res ? await res.json().catch(() => ({})) : {};
+  if (res?.ok) return show(body);
+  // Paiement pas encore confirmé, ou réseau coupé : on réessaie quelques fois.
+  if ((!res || res.status === 409) && tries < 10) return setTimeout(() => fetchCode(tries + 1), 2000);
+  $('status').textContent = (data.workerMessages && body.message) || data.errors[body.error] || data.server;
+  $('status').className = 'bad';
+  return undefined;
+}
+
+if (away) {
+  // redirection vers la page de la langue mémorisée en cours
+} else if (session) {
+  $('bought').hidden = false;
+  fetchCode();
+} else {
+  $('enter').hidden = false;
+  $('enter').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const raw = $('input').value.toUpperCase().replace(/[\s-]/g, '');
+    const ok = /^KLZ[2-9A-HJ-NP-Z]{8}$/.test(raw);
+    $('bad').hidden = ok;
+    if (ok) location.assign(play(`KLZ-${raw.slice(3, 7)}-${raw.slice(7)}`));
+  });
+}
+</script>
+</body>
+</html>

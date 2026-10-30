@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "games.squadranostra.klozio",
+      "sha256_cert_fingerprints": [
+        "E7:E7:27:6E:E9:2B:30:9B:26:66:E6:FC:12:86:CB:99:5D:B7:32:8E:AB:A5:35:B8:2B:69:33:1D:3B:18:B8:34"
+      ]
+    }
+  }
+]
