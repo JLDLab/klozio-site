@@ -1,0 +1,8 @@
+/* Polices embarquées (SIL OFL 1.1, licences dans assets/fonts/), sous-ensemble latin, tirées de Google Fonts.
+   M8 v2 : Outfit 800 (titres, scores), Inter 400/500 (corps), IBM Plex Mono 500 (chiffres, codes). Rien d'autre. */
+@font-face{font-family:"Outfit";font-style:normal;font-weight:800;font-display:swap;
+  src:url("../../assets/fonts/outfit-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 500;font-display:swap;
+  src:url("../../assets/fonts/inter-latin.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;
+  src:url("../../assets/fonts/ibm-plex-mono-500-latin.woff2") format("woff2")}
