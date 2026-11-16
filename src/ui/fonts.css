@@ -1,0 +1,11 @@
+/* Polices embarquées (SIL OFL 1.1, licences dans assets/fonts/), sous-ensemble latin, tirées de Google Fonts.
+   M8 v2 : Outfit 800 (titres, scores), Inter 400/500 (corps), IBM Plex Mono 500 (chiffres, codes). Rien d'autre.
+   M22 : sous-ensemble des caractères affichés (latin de base, Latin-1, œ, guillemets, tirets, €, flèches, ≤ ≥) et
+   Inter réduite à la plage de graisse 400–500 déclarée ici (48 → 27 Ko), avec fontTools, hors du dépôt :
+   fonttools varLib.instancer inter.woff2 wght=400:500, puis pyftsubset --layout-features='*' --flavor=woff2. */
+@font-face{font-family:"Outfit";font-style:normal;font-weight:800;font-display:swap;
+  src:url("../../assets/fonts/outfit-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 500;font-display:swap;
+  src:url("../../assets/fonts/inter-latin.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;
+  src:url("../../assets/fonts/ibm-plex-mono-500-latin.woff2") format("woff2")}

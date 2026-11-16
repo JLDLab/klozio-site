@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KLOZIO · Plans</title>
+<meta name="description" content="KLOZIO plans: on your own, as a team, or your own deals. One-off purchase.">
+<meta name="theme-color" content="#FFF1E1">
+<link rel="icon" href="../../assets/icons/favicon-32.png" sizes="32x32">
+<link rel="canonical" href="https://klozio.app/en/offres/">
+<link rel="alternate" hreflang="fr" href="https://klozio.app/offres/">
+<link rel="alternate" hreflang="en" href="https://klozio.app/en/offres/">
+<link rel="stylesheet" href="../../src/ui/fonts.css">
+<!-- Généré par scripts/offres.js (npm run dist) depuis src/config.js (offers), config/catalog.json et i18n/en.json. -->
+<style>
+:root{--bg:#FFF1E1;--surface:#FFFFFF;--surface-2:#FBE6CF;--line:#EBD3B8;--fg:#3B1F14;--muted:#735540;--accent:#1F4BD8;--accent-ink:#FFF1E1;--mid:#F5A341;--delta-down:#FCE0D6;--ease:cubic-bezier(0.32, 0.72, 0, 1);
+  --display:"Outfit",ui-sans-serif,system-ui,sans-serif;--body:"Inter",ui-sans-serif,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.45 var(--body);padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));overflow-x:hidden}
+main{max-width:1180px;margin:0 auto;padding:20px 0 28px;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.15}
+p{margin:0}
+a{color:var(--fg)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top img{height:26px;width:auto;display:block}
+.cred{font-size:13px;color:var(--muted);margin-top:-12px}
+.nav{display:flex;align-items:center;gap:14px}
+.langs{font:500 13px/1.4 var(--mono);color:var(--muted)}
+.head h1{font-size:30px}
+.head p{color:var(--muted);margin-top:6px}
+.head .meta{font:500 13px/1.4 var(--mono);color:var(--muted)}
+.cols{display:grid;gap:28px}
+.col{display:flex;flex-direction:column;gap:10px}
+.col-head{display:flex;align-items:center;gap:12px}
+.col-head h2{font-size:21px;color:var(--fg)}
+.lead{color:var(--muted);font-size:14px}
+.offer{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.offer.main{border:2px solid var(--fg)}
+.offer-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.offer h3{font-size:17px}
+.tag{display:inline-block;vertical-align:2px;background:var(--mid);color:var(--fg);font:500 10px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:4px}
+.price{white-space:nowrap;text-align:right}
+.price b{font:500 24px/1 var(--mono);color:var(--fg);font-variant-numeric:tabular-nums}
+.price span{font:500 13px/1 var(--mono);color:var(--muted)}
+.line{font:500 14px/1.45 var(--mono);font-variant-numeric:tabular-nums}
+.text{font-size:14px}
+.text b{font-weight:600}
+.ghost{margin-top:6px;min-height:48px;display:flex;align-items:center;justify-content:center;background:none;border:1.5px solid var(--fg);border-radius:12px;padding:12px 16px;font:500 15px/1.2 var(--body);color:var(--fg);text-decoration:none;width:100%;cursor:pointer}
+.ghost:disabled,.buy[aria-disabled="true"]{border-color:var(--line);color:var(--muted);cursor:default}
+.consent{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1.5px solid var(--fg);border-radius:12px;padding:12px 14px;font-size:14px;cursor:pointer}
+.consent input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--accent);cursor:pointer}
+.consent.ask{outline:3px solid var(--accent);outline-offset:2px}
+.vat{color:var(--muted);font-size:14px}
+.note{color:var(--muted);font-size:14px;padding:4px 16px}
+.rules{display:grid;gap:8px;font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+.rules b{font-weight:600}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:500 13px/1.4 var(--mono);color:var(--muted)}
+/* M22 lot C — mini-démo du tableau manager (carte Team) : grille joueurs × étapes, données fictives « Exemple ». Sans
+   JavaScript : l'état final. Avec : une case passe de corail à bleu (calque corail en fondu), la phrase « Lecture »
+   s'écrit mot à mot (opacité) ; 6 s, jouée quand la carte paraît, 3 fois au plus. Effets réduits : rien ne bouge. */
+.demo{margin:0 0 4px;display:flex;flex-direction:column;gap:6px}
+.demo-cap{font:500 12px/1.3 var(--mono);color:var(--muted)}.demo-cap b{font-weight:500;color:var(--fg)}
+.demo table{border-collapse:separate;border-spacing:3px;width:100%;font:500 12px/1 var(--mono);font-variant-numeric:tabular-nums}
+.demo th{color:var(--muted);font-weight:500;padding:2px 0}.demo th.l,.demo td.l{text-align:left;font:500 12px/1.2 var(--body);white-space:nowrap;padding-right:4px}
+.demo td{padding:0;text-align:center}
+.demo .c{position:relative;display:block;padding:5px 0;border-radius:6px;min-width:34px}
+.demo .hi{background:var(--accent);color:var(--accent-ink)}.demo .mid{background:var(--surface-2);color:var(--fg)}.demo .lo{background:var(--delta-down);color:var(--fg)}
+.demo .was{position:absolute;inset:0;opacity:0;padding:5px 0;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.demo-read{font-size:13px;line-height:1.45}.demo-read b{font-weight:600}
+@keyframes demo-in{from{opacity:0}}@keyframes demo-flip{0%,100%{opacity:1}}
+.demo.play .was{animation:demo-out 300ms var(--ease) 1500ms both}@keyframes demo-out{from{opacity:1}to{opacity:0}}
+.demo.play .w{animation:demo-in 200ms var(--ease) calc(2100ms + var(--i) * 140ms) both}
+/* M22 lot C — apparition au défilement (/offres seulement) : opacité et 12 px, une fois ; jamais en effets réduits */
+.reveal{opacity:0;transform:translateY(12px)}.reveal.shown{opacity:1;transform:none;transition:opacity 300ms var(--ease),transform 300ms var(--ease)}
+@media (prefers-reduced-motion:reduce){.demo.play .was,.demo.play .w{animation:none}.reveal{opacity:1;transform:none}}
+@media (min-width:900px){
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  .cols{grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+  .rules{grid-template-columns:repeat(3,1fr);column-gap:24px}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><a href="../../?lang=en"><img src="../../public/brand/klozio_wordmark_chocolat_bleu.svg" alt="KLOZIO" width="130" height="26"></a><span class="nav"><a href="../../?lang=en">Back to the game</a><span class="langs"><a href="../../offres/" lang="fr" hreflang="fr">FR</a> · <b lang="en">EN</b></span></span></div>
+  <p class="cred">178 real-world situations, written by a VP Sales with 20 years in the field.</p>
+  <div class="head">
+    <div><h1>Plans</h1><p>Three situations, one price for each. One-off purchase, no subscription, no ads.</p></div>
+    <p class="meta">178 deals · 3 editions · Squadra Nostra Games · Nov 2026</p>
+  </div>
+  <div class="cols">
+  <section class="col">
+    <div class="col-head"><svg class="wheel" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 L20.00 3.00 A17 17 0 0 1 36.17 14.75 Z" fill="var(--accent)"/><circle cx="20" cy="20" r="17" fill="none" stroke="var(--fg)" stroke-width="3"/></svg><h2>You play alone</h2></div>
+    <p class="lead">A deal in 3 minutes. The code works on 3 devices, for good.</p>
+    <label class="consent" id="achat"><input type="checkbox" id="cgv-ok"><span>I have read the <a href="../../en/terms/">terms of sale</a> and agree that access is delivered immediately, which means I give up my right of withdrawal</span></label>
+    <section class="offer">
+      <div class="offer-top"><h3>Free</h3><p class="price"><b>€0</b></p></div>
+      <p class="line">15 deals · all three editions · to see if it clicks</p>
+    </section>
+    <section class="offer" id="offre-ae">
+      <div class="offer-top"><h3>KLOZIO AE</h3><p class="price"><b>€39</b></p></div>
+      <p class="line">50 deals · €0.78 a deal</p>
+      <p class="text">From the law firm to the unicorn, from the ministry to the PE fund.</p>
+      <a class="ghost buy" data-href="https://buy.stripe.com/9B66oH4OZgBZcC7fG6aAw01" aria-disabled="true">Buy</a>
+    </section>
+    <section class="offer" id="offre-sales-vp">
+      <div class="offer-top"><h3>KLOZIO VP · Head of Sales</h3><p class="price"><b>€39</b></p></div>
+      <p class="line">50 quarters · €0.78 a deal</p>
+      <p class="text">Forecast, pipe, hiring, trade-offs. The nice guy, the mercenary, the fake pipe.</p>
+      <a class="ghost buy" data-href="https://buy.stripe.com/9B68wP5T3etR6dJctUaAw02" aria-disabled="true">Buy</a>
+    </section>
+    <section class="offer" id="offre-sales-sdr">
+      <div class="offer-top"><h3>KLOZIO SDR · BDR</h3><p class="price"><b>€29</b></p></div>
+      <p class="line">49 accounts · €0.59 a deal</p>
+      <p class="text">Targeting, opener, gatekeepers, qualification, handover. The fake hot lead, the no-show.</p>
+      <a class="ghost buy" data-href="https://buy.stripe.com/eVqdR9ftD71pgSn65waAw04" aria-disabled="true">Buy</a>
+    </section>
+    <section class="offer main" id="offre-all">
+      <div class="offer-top"><h3>KLOZIO Complete <span class="tag">The right choice</span></h3><p class="price"><b>€99</b></p></div>
+      <p class="line">178 deals · €0.56 a deal</p>
+      <p class="text">All three editions, the 29 extra AE deals, and everything added later.</p>
+      <a class="ghost buy" data-href="https://buy.stripe.com/fZucN5ftDclJeKfgKaaAw03" aria-disabled="true">Buy</a>
+    </section>
+  </section>
+  <section class="col">
+    <div class="col-head"><svg class="wheel" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 L20.00 3.00 A17 17 0 0 1 36.17 14.75 Z" fill="var(--accent)"/><path d="M20 20 L36.17 14.75 A17 17 0 0 1 29.99 33.75 Z" fill="var(--accent)"/><circle cx="20" cy="20" r="17" fill="none" stroke="var(--fg)" stroke-width="3"/></svg><h2>Your team plays</h2></div>
+    <p class="lead">You see who plays, where they lose, and you hand them the deal of the week.</p>
+    <section class="offer main">
+      <figure class="demo" role="img" aria-label="Example of the manager's board: share of senior instincts per player and per stage, made-up data">
+        <figcaption class="demo-cap"><b>The manager's board</b> · Example · made-up data</figcaption>
+        <table aria-hidden="true"><tr><th class="l"></th><th title="Prospecting">P</th><th title="Qualification">Q</th><th title="Presentation">Pr</th><th title="Negotiation">N</th><th title="Closing">C</th></tr>
+        <tr><td class="l">Example A</td><td><span class="c hi">85%</span></td><td><span class="c hi">80%</span></td><td><span class="c hi">75%</span></td><td><span class="c hi">72%</span></td><td><span class="c hi">70%</span></td></tr>
+        <tr><td class="l">Example B</td><td><span class="c hi">80%</span></td><td><span class="c hi">72%</span></td><td><span class="c mid">60%</span></td><td><span class="c mid">48%</span></td><td><span class="c mid">66%</span></td></tr>
+        <tr><td class="l">Example C</td><td><span class="c hi">76%</span></td><td><span class="c hi">70%</span></td><td><span class="c mid">58%</span></td><td><span class="c lo">40%</span></td><td><span class="c mid">52%</span></td></tr>
+        <tr><td class="l">Example D</td><td><span class="c hi">72%</span></td><td><span class="c mid">64%</span></td><td><span class="c mid">55%</span></td><td><span class="c hi">72%<span class="was c lo" aria-hidden="true">30%</span></span></td><td><span class="c mid">50%</span></td></tr>
+        <tr><td class="l">Example E</td><td><span class="c hi">70%</span></td><td><span class="c mid">58%</span></td><td><span class="c mid">50%</span></td><td><span class="c lo">38%</span></td><td><span class="c mid">46%</span></td></tr>
+        <tr><td class="l">Example F</td><td><span class="c mid">62%</span></td><td><span class="c mid">52%</span></td><td><span class="c mid">47%</span></td><td><span class="c lo">28%</span></td><td><span class="c lo">44%</span></td></tr></table>
+        <p class="demo-read" aria-hidden="true"><b>Reading:</b> <span class="w" style="--i:0">the</span> <span class="w" style="--i:1">team</span> <span class="w" style="--i:2">holds</span> <span class="w" style="--i:3">the</span> <span class="w" style="--i:4">prospecting</span> <span class="w" style="--i:5">stage</span> <span class="w" style="--i:6">(74%)</span> <span class="w" style="--i:7">and</span> <span class="w" style="--i:8">breaks</span> <span class="w" style="--i:9">at</span> <span class="w" style="--i:10">the</span> <span class="w" style="--i:11">negotiation</span> <span class="w" style="--i:12">stage</span> <span class="w" style="--i:13">(50%);</span> <span class="w" style="--i:14">3</span> <span class="w" style="--i:15">of</span> <span class="w" style="--i:16">6</span> <span class="w" style="--i:17">players</span> <span class="w" style="--i:18">are</span> <span class="w" style="--i:19">under</span> <span class="w" style="--i:20">45%</span> <span class="w" style="--i:21">there.</span></p>
+        <p class="sr">Reading: the team holds the prospecting stage (74%) and breaks at the negotiation stage (50%); 3 of 6 players are under 45% there.</p>
+      </figure>
+      <div class="offer-top"><h3>KLOZIO Team</h3><p class="price"><b>€120</b> <span>/ seat / year</span></p></div>
+      <p class="line">10 seats = €1,200 / year · +€90 per extra seat</p>
+      <p class="text">KLOZIO Complete for every player. A team code, the manager dashboard (results by stage, deals everyone misses), the deal of the week with a reminder.</p>
+      <a class="ghost contact" data-offer="team" href="mailto:jordan@jldlabs.com?subject=KLOZIO%20Team%20%C2%B7%2010%20seats&amp;body=Hello%2C%20I'm%20interested%20in%20KLOZIO%20Team%20for%20my%20team.%0D%0ANumber%20of%20salespeople%20and%20preferred%20start%20date%3A%20">Contact me</a>
+    </section>
+    <section class="offer">
+      <div class="offer-top"><h3>KLOZIO Live</h3><p class="price"><b>€200</b> <span>/ participant</span></p></div>
+      <p class="line">€2,400 per half-day · up to 12 people</p>
+      <p class="text">A half-day run by Jordan: six deals played as a team, then a debrief. <b>KLOZIO Team 10 seats included for a year.</b></p>
+      <a class="ghost contact" data-offer="live" href="mailto:jordan@jldlabs.com?subject=KLOZIO%20Live&amp;body=Hello%2C%20I'm%20interested%20in%20a%20KLOZIO%20Live%20half-day.%0D%0ANumber%20of%20participants%20and%20preferred%20date%3A%20">Contact me</a>
+    </section>
+  </section>
+  <section class="col">
+    <div class="col-head"><svg class="wheel" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 L20.00 3.00 A17 17 0 0 1 36.17 14.75 Z" fill="var(--accent)"/><path d="M20 20 L36.17 14.75 A17 17 0 0 1 29.99 33.75 Z" fill="var(--accent)"/><path d="M20 20 L29.99 33.75 A17 17 0 0 1 10.01 33.75 Z" fill="var(--accent)"/><path d="M20 20 L10.01 33.75 A17 17 0 0 1 3.83 14.75 Z" fill="var(--accent)"/><path d="M20 20 L3.83 14.75 A17 17 0 0 1 20.00 3.00 Z" fill="var(--accent)"/><line x1="20" y1="20" x2="20.00" y2="3.00" stroke="var(--bg)" stroke-width="2"/><line x1="20" y1="20" x2="36.17" y2="14.75" stroke="var(--bg)" stroke-width="2"/><line x1="20" y1="20" x2="29.99" y2="33.75" stroke="var(--bg)" stroke-width="2"/><line x1="20" y1="20" x2="10.01" y2="33.75" stroke="var(--bg)" stroke-width="2"/><line x1="20" y1="20" x2="3.83" y2="14.75" stroke="var(--bg)" stroke-width="2"/><circle cx="20" cy="20" r="17" fill="none" stroke="var(--fg)" stroke-width="3"/></svg><h2>We write your deals</h2></div>
+    <p class="lead">Your real situations, rewritten in the KLOZIO format. Only your team plays them.</p>
+    <section class="offer">
+      <div class="offer-top"><h3>Pack 10</h3><p class="price"><b>€290</b> <span>/ deal written</span></p></div>
+      <p class="line">€2,900 for 10 deals</p>
+      <p class="text">A half-day of interviews with the team, then writing and sign-off. A private edition inside your Team.</p>
+      <a class="ghost contact" data-offer="pack-10" href="mailto:jordan@jldlabs.com?subject=KLOZIO%20Pack%2010&amp;body=Hello%2C%20I'm%20interested%20in%20the%20pack%20of%2010%20custom-written%20deals.%0D%0AOur%20trade%20and%20the%20situations%20to%20transpose%3A%20">Contact me</a>
+    </section>
+    <section class="offer">
+      <div class="offer-top"><h3>Pack 20</h3><p class="price"><b>€245</b> <span>/ deal written</span></p></div>
+      <p class="line">€4,900 for 20 deals</p>
+      <p class="text">Same again, for a team with more than one sales cycle.</p>
+      <a class="ghost contact" data-offer="pack-20" href="mailto:jordan@jldlabs.com?subject=KLOZIO%20Pack%2020&amp;body=Hello%2C%20I'm%20interested%20in%20the%20pack%20of%2020%20custom-written%20deals.%0D%0AOur%20trade%20and%20the%20situations%20to%20transpose%3A%20">Contact me</a>
+    </section>
+    <p class="note">Offered after a Live or a Team, never cold: you have to see the team play to know what to write.</p>
+  </section>
+  </div>
+  <p class="vat">VAT not applicable, art. 293 B of the French General Tax Code</p>
+  <div class="rules">
+    <p><b>One-off purchase.</b> Whatever joins the catalogue is included for those who have already paid.</p>
+    <p><b>From €29 or €39 to €99: you pay the difference.</b> Not the full price twice.</p>
+    <p><b>No account, no password.</b> A code, entered once per device.</p>
+    <p><b>Team is sold on invoice.</b> Two codes within the hour: one for the team, one for the manager.</p>
+    <p><b>Live always includes Team.</b> A half-day that leaves nothing behind is useless.</p>
+    <p><b>A price does not move for 90 days.</b> The first buyer and the hundredth pay the same.</p>
+  </div>
+  <div class="foot"><span>klozio.app/en/offres</span><a href="../code/">I have a code</a><a href="mailto:jordan@jldlabs.com?subject=KLOZIO%20plans">jordan@jldlabs.com</a><span><a href="../../en/confidentialite/">Privacy</a> · <a href="../../en/terms/">Terms</a></span></div>
+</main>
+<script>
+// M22 lot C : « Me contacter » compté (contact_click, l'offre seulement, sur le site publié) ; mini-démo du tableau
+// manager jouée quand elle paraît (3 fois au plus) ; offres sous la ligne de flottaison qui apparaissent au défilement.
+// Effets réduits : ni démo animée, ni apparition.
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('a.contact').forEach((a) => a.addEventListener('click', () => {
+  if (!["jldlab.github.io","klozio.app"].includes(location.hostname) || !navigator.sendBeacon) return;
+  try { navigator.sendBeacon("https://klozio-stats.jldlabs.workers.dev/e",JSON.stringify({ e: 'contact_click', o: a.dataset.offer, l: document.documentElement.lang })); } catch {}
+}));
+if (!still && 'IntersectionObserver' in window) {
+  const demo = document.querySelector('.demo');
+  let plays = 0;
+  if (demo) new IntersectionObserver(([en]) => {
+    if (!en.isIntersecting || plays >= 3) return;
+    plays += 1;
+    demo.classList.remove('play');
+    void demo.offsetWidth;
+    demo.classList.add('play');
+  }, { threshold: 0.6 }).observe(demo);
+  const below = [...document.querySelectorAll('.offer, .rules p')].filter((el) => el.getBoundingClientRect().top > innerHeight);
+  const show = new IntersectionObserver((list) => list.forEach((en) => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add('shown');
+    show.unobserve(en.target);
+  }), { threshold: 0.1 });
+  below.forEach((el) => { el.classList.add('reveal'); show.observe(el); });
+}
+// M21 : « Acheter » ne mène au paiement qu'une fois la case des CGV cochée ; sinon, un clic ramène à la case.
+const box = document.getElementById('cgv-ok');
+const buys = document.querySelectorAll('a.buy');
+const sync = () => buys.forEach((a) => {
+  if (box.checked) a.href = a.dataset.href; else a.removeAttribute('href');
+  a.setAttribute('aria-disabled', String(!box.checked));
+});
+buys.forEach((a) => a.addEventListener('click', (e) => {
+  if (box.checked) return;
+  e.preventDefault();
+  box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  box.focus({ preventScroll: true });
+  box.closest('.consent').classList.add('ask');
+}));
+box.addEventListener('change', () => { box.closest('.consent').classList.remove('ask'); sync(); });
+addEventListener('pageshow', sync);
+sync();
+</script>
+</body>
+</html>

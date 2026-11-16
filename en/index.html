@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-static="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://klozio.app/?lang=en">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FFF1E1">
+<meta name="color-scheme" content="light dark">
+<title>KLOZIO</title>
+<link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="public/brand/klozio_z_bleu.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="Jeu mobile de simulation de vente B2B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KLOZIO">
+<meta property="og:title" content="KLOZIO">
+<meta property="og:description" content="Deviens le commercial que tu aurais voulu avoir en face.">
+<meta property="og:url" content="https://klozio.app/">
+<meta property="og:image" content="https://klozio.app/public/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="KLOZIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style id="tokens">:root{--bg:#FFF1E1;--surface:#FFFFFF;--surface-2:#FBE6CF;--line:#EBD3B8;--line-strong:#3B1F14;--fg:#3B1F14;--muted:#735540;--accent:#1F4BD8;--accent-ink:#FFF1E1;--good:#1F4BD8;--mid:#F5A341;--bad:#F26B3A;--skill-ink:#FFF1E1;--hot:#F26B3A;--cold:#8FA8EC;--delta-up:#DCE5FB;--delta-down:#FCE0D6;--sig:#1F4BD8;--stage-p:#1F4BD8;--stage-q:#1F4BD8;--stage-pr:#1F4BD8;--stage-n:#1F4BD8;--stage-c:#1F4BD8;--r-xs:4px;--r-s:7px;--r-m:8px;--r-ml:10px;--r-l:12px;--r-xl:14px;--r-2xl:16px;--r-3xl:20px;--r-pill:999px;--r-round:50%;--shadow-card:0 1px 2px color-mix(in srgb,var(--fg) 8%,transparent);--shadow-marker:0 1px 3px color-mix(in srgb,var(--fg) 35%,transparent);--shadow-edge:0 8px 8px -8px color-mix(in srgb,var(--fg) 25%,transparent);--shadow-float:0 6px 20px color-mix(in srgb,var(--fg) 20%,transparent);--ease:cubic-bezier(0.32, 0.72, 0, 1);--ease-splash-out:cubic-bezier(.22,1,.36,1);--ease-splash-inout:cubic-bezier(.65,0,.35,1);--ease-splash-pop:cubic-bezier(.34,1.4,.64,1);--dur-switch:150ms;--dur-toast:200ms;--dur-boot:250ms;color-scheme:light dark}</style>
+<link rel="stylesheet" href="src/ui/fonts.css">
+<link rel="stylesheet" href="src/ui/app.css">
+<link rel="preload" href="i18n/en.json" as="fetch" crossorigin>
+<link rel="modulepreload" href="src/main.js">
+<link rel="modulepreload" href="src/config.js">
+<link rel="modulepreload" href="src/content/editions/index.js">
+<link rel="modulepreload" href="src/content/texts.js">
+<link rel="modulepreload" href="src/core/price.js">
+<link rel="modulepreload" href="src/core/lang.js">
+<link rel="modulepreload" href="src/core/save.js">
+<link rel="modulepreload" href="src/core/router.js">
+<link rel="modulepreload" href="src/ui/theme.js">
+<link rel="modulepreload" href="src/ui/tokens.js">
+<link rel="modulepreload" href="src/ui/splash.js">
+<link rel="modulepreload" href="src/game/daily.js">
+<link rel="modulepreload" href="src/core/rng.js">
+<link rel="modulepreload" href="src/ui/dom.js">
+<link rel="modulepreload" href="src/ui/screens/home.js">
+<link rel="modulepreload" href="src/content/contact.js">
+<link rel="modulepreload" href="src/ui/wheel.js">
+<link rel="modulepreload" href="src/ui/feel.js">
+<link rel="modulepreload" href="src/ui/icons.js">
+<link rel="modulepreload" href="src/game/progress.js">
+<link rel="modulepreload" href="src/ui/revenue.js">
+<link rel="modulepreload" href="src/ui/screens/campaign.js">
+<link rel="modulepreload" href="src/ui/illustrations.js">
+<link rel="modulepreload" href="src/game/campaign.js">
+<link rel="modulepreload" href="src/ui/screens/first-visit.js">
+<link rel="modulepreload" href="src/access/team.js">
+<link rel="modulepreload" href="src/access/client.js">
+<link rel="modulepreload" href="src/ui/screens/team.js">
+<link rel="modulepreload" href="src/ui/lang.js">
+<link rel="modulepreload" href="src/ui/screens/home-desktop.js">
+<link rel="modulepreload" href="src/game/pacing.js">
+<link rel="modulepreload" href="src/game/duel.js">
+<link rel="modulepreload" href="src/game/deal.js">
+<link rel="modulepreload" href="src/ui/screens/hero-home.js">
+<link rel="modulepreload" href="src/content/hero.js">
+<link rel="modulepreload" href="src/ui/hero.js">
+<link rel="modulepreload" href="src/ui/desktop.js">
+<link rel="modulepreload" href="src/core/play.js">
+<link rel="modulepreload" href="src/audio/sound.js">
+<link rel="modulepreload" href="src/ui/toast.js">
+<link rel="modulepreload" href="src/measure/beacon.js">
+<link rel="modulepreload" href="src/content/editions/ae/edition.js">
+<link rel="modulepreload" href="src/content/editions/ae/texts.js">
+<!-- M22 : html.js (le héros de l'accueil ne s'anime qu'avec JavaScript). Écran de démarrage (html.boot-on) : seulement
+     si le premier écran publié (héros statique, data-static, écrit par npm run dist) n'est pas celui que le jeu va
+     dessiner : visite suivante, autre édition ou autre langue, lien profond, ou pas de héros statique (développement).
+     Même choix de langue que src/core/lang.js pickLang. Retiré par src/main.js (au moins config.splash.bootMinMs, ou
+     jusqu'au chargement). Sans script : pas d'écran de démarrage, le héros statique se lit tel quel. -->
+<script>(function(d){d.classList.add('js');var ok=false;try{var s=d.getAttribute('data-static'),q=new URLSearchParams(location.search),L=['fr','en'],
+g=function(k){return JSON.parse(localStorage.getItem(k)||'null')},p=g('klozio.prefs.v1')||{},c=function(l){return L.indexOf(l)>=0?l:null},
+l=c(d.getAttribute('data-lang'))||c(q.get('lang'))||c(p.lang)||c(q.get('from'))||(/^en/i.test(navigator.language||'')?'en':'fr'),
+e=p.edition||'ae',v=g('klozio.'+e+'.save.v1');ok=!!s&&s===l&&e==='ae'&&!(v&&v.deals&&v.deals.length)&&!g('klozio.save.v1')&&!g('klozio.sales.v1')
+&&!q.has('deal')&&!q.has('defi')&&!q.has('code')}catch(x){}if(!ok)d.classList.add('boot-on')})(document.documentElement)</script>
+<style>.boot{position:fixed;inset:0;z-index:15;display:none;place-items:center;background:#FFF1E1;transition:opacity .25s}
+.boot-on .boot{display:grid}.boot img{width:72vw;max-width:440px;height:auto}.boot.out{opacity:0;pointer-events:none}</style>
+</head>
+<body>
+<div class="boot" id="boot" aria-hidden="true"><img src="public/brand/klozio_wordmark_chocolat_bleu.svg" alt="" width="475" height="156"></div>
+<main class="app static" id="app"><div class="home-top"><h1 class="wordmark"><img src="public/brand/klozio_wordmark_chocolat_bleu.svg" alt="KLOZIO" width="475" height="156"></h1></div><div class="hero-page"><h2 class="hero-title" id="fv-title">Your first deal. 3 minutes. You sign or you lose.</h2><section class="card hero" aria-label="A decision from the game" data-hero="no-show"><div class="hero-top"><span class="eyebrow">The no-show</span><span class="hero-temp">Deal temperature<b class="mono hero-num">40</b><span class="delta up hero-delta" aria-hidden="true"></span></span></div><p class="hero-who">Marketing Director · food manufacturing group</p><p class="hero-ctx">She accepted a meeting booked by your SDR. You've never spoken to her directly.</p><h3 class="hero-ask" id="hero-ask">What do you do before the meeting?</h3><div class="opts hero-opts" role="group" aria-labelledby="hero-ask"><button class="opt hero-opt" type="button" data-i="0" aria-label="Option 1: You prep the demo from the SDR's notes, which look thorough and well detailed."><span class="num" aria-hidden="true">1</span><span class="txt">You prep the demo from the SDR's notes, which look thorough and well detailed.</span></button><button class="opt hero-opt" type="button" data-i="1" aria-label="Option 2: You email her yourself, with a question about a recent launch, to build a connection."><span class="num" aria-hidden="true">2</span><span class="txt">You email her yourself, with a question about a recent launch, to build a connection.</span></button><button class="opt hero-opt" type="button" data-i="2" aria-label="Option 3: You wait for the meeting: she accepted the calendar invite, so it's in the bag."><span class="num" aria-hidden="true">3</span><span class="txt">You wait for the meeting: she accepted the calendar invite, so it's in the bag.</span></button></div><div class="hero-verdict" aria-live="polite"></div><p class="hero-note">Example · free deal</p></section><div class="hero-actions"><button class="cta hero-play" type="button">Play</button><div class="cred-slot"><p class="cred">178 real-world situations, written by a VP Sales with 20 years in the field.</p></div><button class="link fv-all" type="button">See all deals</button></div></div></main>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
